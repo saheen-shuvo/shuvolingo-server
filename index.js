@@ -26,6 +26,23 @@ async function run() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
+    // TUTORS RELATED API's
+const tutorsCollection = client.db('Shuvolingo').collection('tutors');
+
+app.get('/tutors', async(req, res) => {
+    const cursor = tutorsCollection.find();
+    const result = await cursor.toArray();
+    res.send(result);
+})
+
+
+
+
+
+
+
+
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
