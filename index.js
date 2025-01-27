@@ -43,6 +43,12 @@ app.get('/tutors/:id', async(req, res) => {
   res.send(result);
 })
 
+app.post('/tutors', async(req, res) => {
+  const newTutor = req.body;
+  const result = await tutorsCollection.insertOne(newTutor);
+  res.send(result);
+})
+
 
 
 
