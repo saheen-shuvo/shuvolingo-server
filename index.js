@@ -31,7 +31,13 @@ async function run() {
 const tutorsCollection = client.db('Shuvolingo').collection('tutors');
 
 app.get('/tutors', async(req, res) => {
-    const cursor = tutorsCollection.find();
+  const email = req.query.email;
+  let query = {};
+  if(email){
+    query = {email: email}
+  }
+
+    const cursor = tutorsCollection.find(query);
     const result = await cursor.toArray();
     res.send(result);
 })
