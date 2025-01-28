@@ -55,7 +55,32 @@ app.post('/tutors', async(req, res) => {
   res.send(result);
 })
 
+app.put("/tutors/:id", async (req, res) => {
+  const id = req.params.id;
+  const filter = {_id: new ObjectId(id)}
+  const options = {upsert: true};
+  const updatedTutorial = req.body;
+  const tutorial = {
+    $set: {
+      name: updatedTutorial.name,
+      email: updatedTutorial.email,
+      image: updatedTutorial.image,
+      language: updatedTutorial.language,
+      price: updatedTutorial.price,
+      review: updatedTutorial.review,
+      description: updatedTutorial.description,
+    }
+  }
+  const result = await tutorsCollection.updateOne(filter, tutorial, options)
+  res.send(result);
+});
 
+app.delete('/tutors/:id', async(req, res) => {
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)}
+  const result = await tutorsCollection.deleteOne(query);
+  res.send(result);
+})
 
 
 
