@@ -39,10 +39,10 @@ app.get('/tutors', async(req, res) => {
   const language = req.query.language;
   let query = {};
   if(email){
-    query = {email: email};
+    query.email = email
   }
   if(language){
-    query = {language: language};
+    query.language = language;
   }
     const cursor = tutorsCollection.find(query);
     const result = await cursor.toArray();
